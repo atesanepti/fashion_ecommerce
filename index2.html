@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        nav {
+            background: lightgreen;
+            font-family: sans-serif;
+            padding: 20px;
+            color: #202025;
+           width: 100%;
+        }
+
+        nav.sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* Customize the background color as needed */
+            z-index: 1000;
+            /* Add any additional styling as needed */
+        }
+
+        nav ul {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+            justify-content: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+        }
+
+        #section1,
+        #section2,
+        #section3 {
+            width: 100%;
+            height: 400px;
+            background: yellowgreen;
+        }
+
+        #section2 {
+            background: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#section1">Section 1</a></li>
+            <li><a href="#section2">Section 2</a></li>
+            <li><a href="#section3">Section 3</a></li>
+            <!-- ... More menu items ... -->
+        </ul>
+    </nav>
+
+    <div id="section1">
+        Content of Section 1
+    </div>
+
+    <div id="section2">
+        Content of Section 2
+    </div>
+
+    <div id="section3">
+        Content of Section 3
+    </div>
+    <!-- ... More sections ... -->
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let menuLink = document.querySelectorAll("nav ul li a")
+            menuLink.forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    let targetId = link.getAttribute("href").substring(1)
+                    document.getElementById(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    })
+
+                })
+            })
+
+        })
+        window.addEventListener("scroll", () => {
+            let header = document.querySelector("nav")
+            let scrollPosition = window.scrollY;
+            if(scrollPosition > 0){
+                header.classList.add("sticky")
+            }
+            else{
+                header.classList.remove("sticky")
+            }
+        })
+    </script>
+</body>
+
+</html>
